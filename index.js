@@ -57,11 +57,26 @@ const player = new Player({
       imageSrc: './img/King/Door_in.png',
       loop: false,
       onComplete: () => {
-        // Transition to the next level
+        // Transition to the next level using levelLogic
         gsap.to(overlay, {
           opacity: 1,
           onComplete: () => {
-            level++;
+            // Handle level transition based on current level and door type
+            if (level === 0) {
+              // From hub level, determine which path to take
+              const doorType = getCurrentDoorType();
+              if (doorType === 'java') {
+                level = 'java1';
+              } else if (doorType === 'python') {
+                level = 'python1';
+              }
+            } else if (typeof level === 'string') {
+              // From specific level, go to next level in same path
+              const path = level.substring(0, level.length - 1); // Remove last character (level number)
+              const levelNum = parseInt(level.substring(level.length - 1));
+              level = path + (levelNum + 1);
+            }
+            
             levels[level].init();
     
             // Fade out black screen first, then start door exit animation
@@ -71,7 +86,9 @@ const player = new Player({
                 // Now start the door exit animation after black screen is gone
                 setTimeout(() => {
                   player.switchSprite('exitDoor');
-                  doorClosing.play(); // Start door closing animation at same time
+                  if (doorClosing) {
+                    doorClosing.play(); // Start door closing animation at same time
+                  }
                   
                   // Wait for exit animation to complete, then allow input
                   setTimeout(() => {
@@ -142,10 +159,15 @@ const player = new Player({
 });
 
 // Level setup
-let level = 1;
+let level = 0; // Start with hub level
 let levels = {
-  1: level1,
-  2: level2,
+  0: level0,
+  // Java levels
+  'java1': javaLevel1,
+  'java2': javaLevel2,
+  // Python levels
+  'python1': pythonLevel1,
+  'python2': pythonLevel2,
 };
 
 // Input handling
@@ -229,6 +251,13 @@ function animate() {
   c.restore()
 }
 
+
+// Function to get current door type for level transitions
+function getCurrentDoorType() {
+  // This would be determined by which door the player is near
+  // For now, return a default value - this should be enhanced with actual door detection
+  return 'java'; // Default to java path
+}
 
 // Initialize game after preloading images
 preloadImages().then(() => {
