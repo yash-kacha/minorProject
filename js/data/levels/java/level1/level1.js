@@ -48,25 +48,36 @@ const javaLevel1 = {
             frameRate: 1
         })
 
+        doorClosing = new Sprite({
+            position: {
+                x:736,
+                y: 450,
+            },
+            imageSrc: './img/Doors/Closing.png',
+            frameRate: 5,
+            frameBuffer: 4,
+            loop: false,
+            autoPlay: false,
+        })
         // Create doors for Java Level 1
         doors = [
+            // new Sprite({
+            //     position: {
+            //         x: 833,
+            //         y: 456,
+            //     },
+            //     imageSrc: './img/Doors/Opening.png',
+            //     frameRate: 5,
+            //     frameBuffer: 4,
+            //     loop: false,
+            //     autoPlay: false,
+            //     doorType: 'next',
+            //     spawnPosition: { x: 100, y: 100 }
+            // }),
             new Sprite({
                 position: {
-                    x: 833,
-                    y: 456,
-                },
-                imageSrc: './img/Doors/Opening.png',
-                frameRate: 5,
-                frameBuffer: 4,
-                loop: false,
-                autoPlay: false,
-                doorType: 'next',
-                spawnPosition: { x: 100, y: 100 }
-            }),
-            new Sprite({
-                position: {
-                    x: 96,
-                    y: 169,
+                    x: 576,
+                    y: 288,
                 },
                 imageSrc: './img/Doors/Opening.png',
                 frameRate: 5,
@@ -74,7 +85,7 @@ const javaLevel1 = {
                 loop: false,
                 autoPlay: false,
                 doorType: 'hub',
-                spawnPosition: { x: 200, y: 100 }
+                spawnPosition: { x: 512, y: 384}
             })
         ]
     }

@@ -41,6 +41,18 @@ const pythonLevel1 = {
             frameRate: 1
         })
 
+         doorClosing = new Sprite({
+            position: {
+                x: 833,
+                y: 456,
+            },
+            imageSrc: './img/Doors/Closing.png',
+            frameRate: 5,
+            frameBuffer: 4,
+            loop: false,
+            autoPlay: false,
+        })
+
         // Create doors for Python Level 1
         doors = [
             new Sprite({
@@ -66,7 +78,7 @@ const pythonLevel1 = {
                 frameBuffer: 4,
                 loop: false,
                 autoPlay: false,
-                doorType: 'hub',
+                doorType: 'integer',
                 spawnPosition: { x: 200, y: 100 }
             })
         ]

@@ -55,7 +55,7 @@ const level0 = {
                 loop: false,
                 autoPlay: false,
                 doorType: 'java', // Add identifier for door type
-                spawnPosition: { x: 250, y: 280 } // Where player will spawn in java level 1
+                spawnPosition: { x: 736, y: 480 } // Where player will spawn in java level 1
             }),
             // Python door (right side)
             new Sprite({
@@ -69,7 +69,7 @@ const level0 = {
                 loop: false,
                 autoPlay: false,
                 doorType: 'python', // Add identifier for door type
-                spawnPosition: { x: 100, y: 100 } // Where player will spawn in python level 1
+                spawnPosition: { x: 736, y: 480 } // Where player will spawn in python level 1
             })
         ]
     }

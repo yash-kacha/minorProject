@@ -11,7 +11,10 @@ class LevelLogic {
             python: {
                 1: 'python/level1/level1',
                 2: 'python/level2/level2'
-            }
+            },
+
+
+           
         };
     }
 
