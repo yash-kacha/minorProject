@@ -28,10 +28,16 @@ const level1 = {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    init: () => {
-       parsedCollisions = level1.collisionData.parse2D()
-        collisionBlocks = parsedCollisions.createObjectsFrom2D()
+    init: (spawnPosition) => {
+       parsedCollisions = parse2D(level1.collisionData, 48)
+        collisionBlocks = createObjectsFrom2D(parsedCollisions)
         player.collisionBlocks = collisionBlocks
+
+        if (spawnPosition) {
+            player.position.x = spawnPosition.x
+            player.position.y = spawnPosition.y
+        }
+
         background = new Sprite({
             position: {
                 x: 0,
@@ -52,6 +58,8 @@ const level1 = {
                 frameBuffer: 4,
                 loop: false,
                 autoPlay: false,
+                doorType: 'next',
+                spawnPosition: { x: 100, y: 100 }
             }),
             new Sprite({
                 position: {
@@ -63,6 +71,8 @@ const level1 = {
                 frameBuffer: 4,
                 loop: false,
                 autoPlay: false,
+                doorType: 'hub',
+                spawnPosition: { x: 200, y: 100 }
             })
         ]
     }

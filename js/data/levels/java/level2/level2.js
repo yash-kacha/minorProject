@@ -20,15 +20,16 @@ const javaLevel2 = {
         0, 0, 0, 295, 295, 295, 295, 295, 295, 295, 295, 295, 295, 295, 295, 295, 0, 0, 0, 0, 0, 0, 0, 0, 295, 295, 295, 295, 295, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
-    init: () => {
+    init: (spawnPosition) => {
         // Parse collision data and create collision blocks
-        parsedCollisions = javaLevel2.collisionData.parse2D()
-        collisionBlocks = parsedCollisions.createObjectsFrom2D()
+        parsedCollisions = parse2D(javaLevel2.collisionData, 32)
+        collisionBlocks = createObjectsFrom2D(parsedCollisions)
         player.collisionBlocks = collisionBlocks
 
-        // Set player position (like original level2)
-        player.position.x = 830
-        player.position.y = 450
+        if (spawnPosition) {
+            player.position.x = spawnPosition.x
+            player.position.y = spawnPosition.y
+        }
 
         // Set background
         background = new Sprite({
@@ -52,7 +53,8 @@ const javaLevel2 = {
                 frameBuffer: 4,
                 loop: false,
                 autoPlay: false,
-                doorType: 'next' // Next level in Java path
+                doorType: 'next',
+                spawnPosition: { x: 100, y: 100 }
             }),
             new Sprite({
                 position: {
@@ -64,7 +66,8 @@ const javaLevel2 = {
                 frameBuffer: 4,
                 loop: false,
                 autoPlay: false,
-                doorType: 'hub' // Back to hub
+                doorType: 'hub',
+                spawnPosition: { x: 200, y: 100 }
             })
         ]
 

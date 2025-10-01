@@ -20,11 +20,16 @@ const level0 = {
         0, 0, 0, 295, 295, 295, 295, 295, 295, 295, 295, 295, 295, 295, 295, 295, 0, 0, 0, 0, 0, 0, 0, 0, 295, 295, 295, 295, 295, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
-    init: () => {
+    init: (spawnPosition) => {
         // Parse collision data and create collision blocks
-        parsedCollisions = level0.collisionData.parse2D()
-        collisionBlocks = parsedCollisions.createObjectsFrom2D()
+        parsedCollisions = parse2D(level0.collisionData, 32)
+        collisionBlocks = createObjectsFrom2D(parsedCollisions)
         player.collisionBlocks = collisionBlocks
+
+        if (spawnPosition) {
+            player.position.x = spawnPosition.x
+            player.position.y = spawnPosition.y
+        }
 
         // Set background
         background = new Sprite({
@@ -49,7 +54,8 @@ const level0 = {
                 frameBuffer: 4,
                 loop: false,
                 autoPlay: false,
-                doorType: 'java' // Add identifier for door type
+                doorType: 'java', // Add identifier for door type
+                spawnPosition: { x: 250, y: 280 } // Where player will spawn in java level 1
             }),
             // Python door (right side)
             new Sprite({
@@ -62,7 +68,8 @@ const level0 = {
                 frameBuffer: 4,
                 loop: false,
                 autoPlay: false,
-                doorType: 'python' // Add identifier for door type
+                doorType: 'python', // Add identifier for door type
+                spawnPosition: { x: 100, y: 100 } // Where player will spawn in python level 1
             })
         ]
     }

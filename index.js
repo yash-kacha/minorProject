@@ -57,27 +57,37 @@ const player = new Player({
       imageSrc: './img/King/Door_in.png',
       loop: false,
       onComplete: () => {
-        // Transition to the next level using levelLogic
+        // Transition to the next level
         gsap.to(overlay, {
           opacity: 1,
           onComplete: () => {
+            const door = getCollidedDoor();
+            console.log('collided door:', door);
+            if (!door) return;
+
+            console.log('current level:', level);
+            console.log('doorType:', door.doorType);
+
             // Handle level transition based on current level and door type
             if (level === 0) {
-              // From hub level, determine which path to take
-              const doorType = getCurrentDoorType();
-              if (doorType === 'java') {
+              if (door.doorType === 'java') {
                 level = 'java1';
-              } else if (doorType === 'python') {
+              } else if (door.doorType === 'python') {
                 level = 'python1';
               }
             } else if (typeof level === 'string') {
-              // From specific level, go to next level in same path
-              const path = level.substring(0, level.length - 1); // Remove last character (level number)
-              const levelNum = parseInt(level.substring(level.length - 1));
-              level = path + (levelNum + 1);
+              if (door.doorType === 'next') {
+                const path = level.substring(0, level.length - 1); // e.g. 'java'
+                const levelNum = parseInt(level.substring(level.length - 1)); // e.g. 1
+                level = path + (levelNum + 1); // e.g. 'java2'
+              } else if (door.doorType === 'hub') {
+                level = 0;
+              }
             }
+
+            console.log('next level:', level);
             
-            levels[level].init();
+            levels[level].init(door.spawnPosition);
     
             // Fade out black screen first, then start door exit animation
             gsap.to(overlay, {
@@ -253,11 +263,7 @@ function animate() {
 
 
 // Function to get current door type for level transitions
-function getCurrentDoorType() {
-  // This would be determined by which door the player is near
-  // For now, return a default value - this should be enhanced with actual door detection
-  return 'java'; // Default to java path
-}
+
 
 // Initialize game after preloading images
 preloadImages().then(() => {

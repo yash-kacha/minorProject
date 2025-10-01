@@ -1,5 +1,5 @@
 class Sprite {
-  constructor({ position, imageSrc, frameRate = 1, animations, frameBuffer = 2, loop = true, autoPlay = true }) {
+  constructor({ position, imageSrc, frameRate = 1, animations, frameBuffer = 2, loop = true, autoPlay = true, doorType, spawnPosition }) {
     this.position = position;
     this.image = new Image()
 
@@ -19,6 +19,9 @@ class Sprite {
     this.loop = loop
     this.autoPlay = autoPlay
     this.currentAnimation
+
+    this.doorType = doorType;
+    this.spawnPosition = spawnPosition;
 
     // Preload all animation images
     if (this.animations) {
