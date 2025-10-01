@@ -58,6 +58,9 @@ class Player extends Sprite {
         // Don't switch if already on this animation
         if (this.image === this.animations[name].image) return
         
+        // Reset the onComplete flag for the new animation
+        this.animations[name].isActive = false
+
         // Simple switch - no delays, no complex logic
         this.currentFrame = 0
         this.image = this.animations[name].image

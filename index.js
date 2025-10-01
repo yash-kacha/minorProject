@@ -82,6 +82,8 @@ const player = new Player({
                 level = path + (levelNum + 1); // e.g. 'java2'
               } else if (door.doorType === 'hub') {
                 level = 0;
+              } else if (level === 'java1' && door.doorType === 'integer') {
+                level = 'java1_integer';
               }
             }
 
@@ -175,6 +177,7 @@ let levels = {
   // Java levels
   'java1': javaLevel1,
   'java2': javaLevel2,
+  'java1_integer': javaLevel1_integer,
   // Python levels
   'python1': pythonLevel1,
   'python2': pythonLevel2,

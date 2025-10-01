@@ -1,5 +1,5 @@
-// Java Level 1
-const javaLevel1 = {
+// Java Level 1 Integer Sublevel
+const javaLevel1_integer = {
     // Collision data for Java Level 1 (using same as original level1 for now)
     collisionData:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -20,7 +20,7 @@ const javaLevel1 = {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     init: (spawnPosition) => {
-       parsedCollisions = parse2D(javaLevel1.collisionData, 32)
+       parsedCollisions = parse2D(javaLevel1_integer.collisionData, 31)
         collisionBlocks = createObjectsFrom2D(parsedCollisions)
         player.collisionBlocks = collisionBlocks
 

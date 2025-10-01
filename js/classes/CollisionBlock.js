@@ -7,7 +7,7 @@ class CollisionBlock {
 
     // Draws the collision block on the canvas (for debugging)
     draw() {
-        c.fillStyle = 'rgba(255,0,0,0.0)' // Transparent red
+        c.fillStyle = 'rgba(255,0,0,0.5)' // Transparent red
         c.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
 }

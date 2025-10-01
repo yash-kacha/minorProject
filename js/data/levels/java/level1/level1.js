@@ -84,8 +84,8 @@ const javaLevel1 = {
                 frameBuffer: 4,
                 loop: false,
                 autoPlay: false,
-                doorType: 'hub',
-                spawnPosition: { x: 512, y: 384}
+                doorType: 'integer',
+                spawnPosition: { x: 512, y: 284}
             })
         ]
     }

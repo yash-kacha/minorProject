@@ -3,18 +3,21 @@ class LevelLogic {
     constructor() {
         this.currentPath = null; // 'java' or 'python'
         this.currentLevel = 0; // 0 = hub, 1+ = specific levels
+        this.currentSubLevel = null;
         this.levelStructure = {
             java: {
-                1: 'java/level1/level1',
-                2: 'java/level2/level2'
+                1: {
+                    path: 'java/level1/level1',
+                    sublevels: {
+                        integer: 'java/level1/DataType/integer'
+                    }
+                },
+                2: { path: 'java/level2/level2' }
             },
             python: {
-                1: 'python/level1/level1',
-                2: 'python/level2/level2'
+                1: { path: 'python/level1/level1' },
+                2: { path: 'python/level2/level2' }
             },
-
-
-           
         };
     }
 
@@ -22,13 +25,14 @@ class LevelLogic {
     initLevel(path, levelNumber) {
         this.currentPath = path;
         this.currentLevel = levelNumber;
-        
+        this.currentSubLevel = null;
+
         if (levelNumber === 0) {
             level0.init();
         } else {
-            const levelPath = this.levelStructure[path][levelNumber];
-            if (levelPath) {
-                this.loadLevel(levelPath);
+            const levelDef = this.levelStructure[path] && this.levelStructure[path][levelNumber];
+            if (levelDef && levelDef.path) {
+                this.loadLevel(levelDef.path);
             } else {
                 console.error(`Level ${levelNumber} not found for path ${path}`);
             }
@@ -48,8 +52,15 @@ class LevelLogic {
             // From hub level, go to level 1 of selected path
             this.initLevel(doorType, 1);
         } else {
-            // From specific level, go to next level or back to hub
-            this.initLevel(this.currentPath, this.currentLevel + 1);
+            const levelDef = this.levelStructure[this.currentPath] && this.levelStructure[this.currentPath][this.currentLevel];
+            if (levelDef && levelDef.sublevels && levelDef.sublevels[doorType]) {
+                const subLevelPath = levelDef.sublevels[doorType];
+                this.loadLevel(subLevelPath);
+                this.currentSubLevel = doorType;
+            } else {
+                // From specific level, go to next level or back to hub
+                this.initLevel(this.currentPath, this.currentLevel + 1);
+            }
         }
     }
 
@@ -58,6 +69,7 @@ class LevelLogic {
         return {
             path: this.currentPath,
             level: this.currentLevel,
+            sublevel: this.currentSubLevel,
             isHub: this.currentLevel === 0
         };
     }
@@ -66,6 +78,7 @@ class LevelLogic {
     resetToHub() {
         this.currentPath = null;
         this.currentLevel = 0;
+        this.currentSubLevel = null;
         level0.init();
     }
 }
