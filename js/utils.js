@@ -12,7 +12,7 @@ function createObjectsFrom2D(data)
     data.forEach((row, y) => {
 
         row.forEach((symbol, x) => {
-            if (symbol === 295) {
+            if (symbol !== 0) {
                 objects.push(
                     new CollisionBlock({
                         position: {

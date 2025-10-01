@@ -20,7 +20,7 @@ const javaLevel1_integer = {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     init: (spawnPosition) => {
-       parsedCollisions = parse2D(javaLevel1_integer.collisionData, 31)
+       parsedCollisions = parse2D(javaLevel1_integer.collisionData, 32)
         collisionBlocks = createObjectsFrom2D(parsedCollisions)
         player.collisionBlocks = collisionBlocks
 
@@ -41,7 +41,7 @@ const javaLevel1_integer = {
 
         doorClosing = new Sprite({
             position: {
-               x: 512, y: 384
+               x: 512, y: 354
             },
             imageSrc: './img/Doors/Closing.png',
             frameRate: 5,

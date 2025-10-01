@@ -217,6 +217,9 @@ function animate() {
   const cameraX = playerCenterX - viewportWidth / 2
   const cameraY = playerCenterY - viewportHeight / 2
 
+
+   c.fillStyle = "#3F3851"
+  c.fillRect(0, 0, canvas.width, canvas.height)
   // Draw world with camera transform and zoom
   c.save()
   c.scale(CAMERA_SCALE, CAMERA_SCALE)
