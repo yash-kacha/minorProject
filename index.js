@@ -300,12 +300,14 @@ preloadImages().then(() => {
 
 window.addEventListener('keydown', (event) => {
   if (event.key === 'e') {
-    npcs.forEach((npc) => {
+    for (let i = 0; i < npcs.length; i++) {
+      const npc = npcs[i];
       const distance = Math.hypot(player.position.x - npc.position.x, player.position.y - npc.position.y);
       if (distance < 50) {
         npc.speak();
+        break; // Interact with only one NPC at a time
       }
-    });
+    }
   }
 });
 

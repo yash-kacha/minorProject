@@ -76,10 +76,11 @@ const level0 = {
         npcs = [
             new NPC({
                 position: {
-                    x: 400,
-                    y: 450,
+                    x: 350,
+                    y: 485,
                 },
-                imageSrc: './img/King/IdleLeft.png', // Placeholder image
+                imageSrc: './img/IdlePig.png', // Placeholder image
+                frameRate: 11,
                 dialogue: [
                     'Welcome, traveler!',
                     'This is the hub world.',
