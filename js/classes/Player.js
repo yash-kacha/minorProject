@@ -177,5 +177,6 @@ class Player extends Sprite {
                 }
             }
         }
+        super.update();
     }
 }

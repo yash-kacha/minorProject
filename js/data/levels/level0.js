@@ -80,7 +80,8 @@ const level0 = {
                     y: 485,
                 },
                 imageSrc: './img/IdlePig.png', // Placeholder image
-                frameRate: 11,
+                frameRate: 12,
+                frameBuffer: 4,
                 dialogue: [
                     'Welcome, traveler!',
                     'This is the hub world.',

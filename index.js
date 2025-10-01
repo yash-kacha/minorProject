@@ -237,8 +237,9 @@ function animate() {
   })
 
   npcs.forEach((npc) => {
-    npc.draw()
-  })
+    npc.update();
+    npc.draw();
+  });
 
   // Check for NPC interaction
   npcs.forEach((npc) => {

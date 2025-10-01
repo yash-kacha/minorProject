@@ -63,7 +63,9 @@ class Sprite {
       c.fillStyle = 'rgba(0, 255, 0, 0.5)'
       c.fillRect(this.position.x, this.position.y, this.width || 32, this.height || 32)
     }
-    
+  }
+
+  update() {
     this.updateFrames()
   }
 
