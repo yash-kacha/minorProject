@@ -88,5 +88,23 @@ const javaLevel1 = {
                 spawnPosition: { x: 512, y: 284}
             })
         ]
+
+           npcs = [
+            new NPC({
+                position: {
+                    x: 350,
+                    y: 483,
+                },
+                imageSrc: './img/pig/IdlePigLeft.png', // Placeholder image
+                frameRate: 12,
+                frameBuffer: 4,
+                dialogue: [
+                    'Its the first level of your learning',
+                    'in this level you need to explore various door and find real door that leads to the new levels',
+                    'if you find all and complete all sub-levels then you will be able to go to the next level',
+                ]
+            }),
+           ]
+
     }
 }

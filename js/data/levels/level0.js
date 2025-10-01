@@ -77,9 +77,9 @@ const level0 = {
             new NPC({
                 position: {
                     x: 350,
-                    y: 485,
+                    y: 483,
                 },
-                imageSrc: './img/IdlePig.png', // Placeholder image
+                imageSrc: './img/pig/IdlePigLeft.png', // Placeholder image
                 frameRate: 12,
                 frameBuffer: 4,
                 dialogue: [
@@ -89,7 +89,42 @@ const level0 = {
                     'The door on the right leads to the Python path.',
                     'Choose your destiny!'
                 ]
+            }),
+
+            new NPC({
+                position: {
+
+                    x: 250,
+                    y: 131,
+                },
+                imageSrc: './img/pig/IdlePigRight.png', // Placeholder image
+                frameRate: 12,
+                frameBuffer: 4,
+                dialogue: [
+                    'Great Choise with Java!!!',
+                    'Wishing you a very Beautiful learning Journey',
+                    
+                ]
+            }),
+
+             new NPC({
+                position: {
+
+                    x: 720,
+                    y: 258,
+                },
+                imageSrc: './img/pig/IdlePigLeft.png', // Placeholder image
+                frameRate: 12,
+                frameBuffer: 4,
+                dialogue: [
+                    'Great Choise with Python!!!',
+                    'Wishing you a very Beautiful learning Journey',
+                    
+                ]
             })
+
+
+
         ]
     }
 }

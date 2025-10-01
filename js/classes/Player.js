@@ -4,11 +4,11 @@ class Player extends Sprite {
     }) {
         super({ imageSrc, frameRate, animations ,loop})
         this.position = {
-            x: 130,
-            y: 500,
+            // x: 130,
+            // y: 500,
 
-            // x: 96,
-            // y: 169,
+            x: 96,
+            y: 169,
         }
         this.velosity = {
             x: 0,
