@@ -241,6 +241,8 @@ function animate() {
     npc.draw();
   });
 
+  player.collisionBlocks = [...collisionBlocks, ...npcs];
+
   // Check for NPC interaction
   npcs.forEach((npc) => {
     const distance = Math.hypot(player.position.x - npc.position.x, player.position.y - npc.position.y);

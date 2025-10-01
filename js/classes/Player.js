@@ -127,7 +127,8 @@ class Player extends Sprite {
         for (let i = 0; i < this.collisionBlocks.length; i++) {
             const collisionBlock = this.collisionBlocks[i]
 
-            if (this.hitbox.position.x <= (collisionBlock.position.x + collisionBlock.width) &&
+            if (collisionBlock.width && collisionBlock.height &&
+                this.hitbox.position.x <= (collisionBlock.position.x + collisionBlock.width) &&
                 (this.hitbox.position.x + this.hitbox.width) >= (collisionBlock.position.x) &&
                 (this.hitbox.position.y + this.hitbox.height) >= (collisionBlock.position.y) &&
                 (this.hitbox.position.y) <= (collisionBlock.position.y + collisionBlock.height)
@@ -157,7 +158,8 @@ class Player extends Sprite {
         for (let i = 0; i < this.collisionBlocks.length; i++) {
             const collisionBlock = this.collisionBlocks[i]
 
-            if (this.hitbox.position.x <= (collisionBlock.position.x + collisionBlock.width) &&
+            if (collisionBlock.width && collisionBlock.height &&
+                this.hitbox.position.x <= (collisionBlock.position.x + collisionBlock.width) &&
                 (this.hitbox.position.x + this.hitbox.width) >= (collisionBlock.position.x) &&
                 (this.hitbox.position.y + this.hitbox.height) >= (collisionBlock.position.y) &&
                 (this.hitbox.position.y) <= (collisionBlock.position.y + collisionBlock.height)
