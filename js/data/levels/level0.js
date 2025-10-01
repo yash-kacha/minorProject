@@ -72,5 +72,22 @@ const level0 = {
                 spawnPosition: { x: 736, y: 480 } // Where player will spawn in python level 1
             })
         ]
+
+        npcs = [
+            new NPC({
+                position: {
+                    x: 400,
+                    y: 450,
+                },
+                imageSrc: './img/King/IdleLeft.png', // Placeholder image
+                dialogue: [
+                    'Welcome, traveler!',
+                    'This is the hub world.',
+                    'The door on the left leads to the Java path.',
+                    'The door on the right leads to the Python path.',
+                    'Choose your destiny!'
+                ]
+            })
+        ]
     }
 }

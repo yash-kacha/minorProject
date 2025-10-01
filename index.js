@@ -45,6 +45,7 @@ let collisionBlocks;
 let background;
 let doors;
 let doorClosing;
+let npcs = [];
 
 // Player setup
 const player = new Player({
@@ -235,6 +236,21 @@ function animate() {
     door.draw()
   })
 
+  npcs.forEach((npc) => {
+    npc.draw()
+  })
+
+  // Check for NPC interaction
+  npcs.forEach((npc) => {
+    const distance = Math.hypot(player.position.x - npc.position.x, player.position.y - npc.position.y);
+    if (distance < 50) {
+      // Display a prompt to interact
+      c.fillStyle = 'white';
+      c.font = '20px Abaddon';
+      c.fillText('Press E to talk', npc.position.x - 50, npc.position.y - 20);
+    }
+  });
+
   // Draw door closing animation if it exists
   if (doorClosing) {
     doorClosing.draw()
@@ -282,4 +298,14 @@ preloadImages().then(() => {
   animate()
 })
 
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'e') {
+    npcs.forEach((npc) => {
+      const distance = Math.hypot(player.position.x - npc.position.x, player.position.y - npc.position.y);
+      if (distance < 50) {
+        npc.speak();
+      }
+    });
+  }
+});
 

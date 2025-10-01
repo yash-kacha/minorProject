@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'Abaddon';
+  src: url('Abaddon_Fonts_v1.2/Abaddon_Fonts_v1.2/Abaddon Bold.ttf') format('truetype');
+}
+
+#chatbox {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  border: 2px solid white;
+  border-radius: 5px;
+  font-family: 'Abaddon', sans-serif;
+  font-size: 24px;
+  display: none; /* Initially hidden */
+}
