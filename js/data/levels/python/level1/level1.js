@@ -1,4 +1,4 @@
-// Python Level 1
+// python Level 1
 const pythonLevel1 = {
     // Collision data for python Level 1 (using same as original level1 for now)
     collisionData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -86,7 +86,21 @@ const pythonLevel1 = {
                 autoPlay: false,
                 doorType: 'integer',
                 spawnPosition: { x: 512, y: 284}
+            }),
+            new Sprite({
+                position: {
+                    x: 415,
+                    y: 350,
+                },
+                imageSrc: './img/Doors/Opening.png',
+                frameRate: 5,
+                frameBuffer: 4,
+                loop: false,
+                autoPlay: false,
+                doorType: 'index_redirect',
+                spawnPosition: { x: 403, y: 370}
             })
+            
         ]
 
            npcs = [

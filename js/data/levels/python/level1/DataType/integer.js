@@ -76,6 +76,19 @@ const pythonLevel1_integer = {
                 autoPlay: false,
                 doorType: 'hub',
                 spawnPosition: { x: 200, y: 100 }
+            }),
+            new Sprite({
+                position: {
+                    x: 832,
+                    y: 296,
+                },
+                imageSrc: './img/Doors/Opening.png',
+                frameRate: 5,
+                frameBuffer: 4,
+                loop: false,
+                autoPlay: false,
+                doorType: 'index_redirect',
+                spawnPosition: { x: 799, y: 306}
             })
         ]
     }

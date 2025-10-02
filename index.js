@@ -87,6 +87,10 @@ const player = new Player({
                 level = 'java1_integer';
               } else if (level === 'python1' && door.doorType === 'integer') {
                 level = 'python1_integer';
+              } else if (door.doorType === 'index_redirect') {
+                // Redirect to index.html
+                window.location.href = './index.html';
+                return;
               }
             }
 
@@ -298,11 +302,11 @@ function animate() {
 // Initialize game after preloading images
 preloadImages().then(() => {
   console.log('All images preloaded successfully');
-  levels[level].init()
+  levels[level].init({ x: 850, y: 466 })
   animate()
 }).catch((error) => {
   console.log('Some images failed to load, but continuing anyway');
-  levels[level].init()
+  levels[level].init({ x: 850, y: 466 })
   animate()
 })
 
