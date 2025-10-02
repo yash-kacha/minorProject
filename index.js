@@ -85,6 +85,8 @@ const player = new Player({
                 level = 0;
               } else if (level === 'java1' && door.doorType === 'integer') {
                 level = 'java1_integer';
+              } else if (level === 'python1' && door.doorType === 'integer') {
+                level = 'python1_integer';
               }
             }
 
@@ -182,6 +184,7 @@ let levels = {
   // Python levels
   'python1': pythonLevel1,
   'python2': pythonLevel2,
+  'python1_integer': pythonLevel1_integer,
 };
 
 // Input handling
@@ -233,6 +236,7 @@ function animate() {
   })
 
   doors.forEach((door) => {
+    door.update()
     door.draw()
   })
 
@@ -256,6 +260,7 @@ function animate() {
 
   // Draw door closing animation if it exists
   if (doorClosing) {
+    doorClosing.update()
     doorClosing.draw()
   }
 

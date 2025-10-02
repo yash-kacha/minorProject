@@ -15,7 +15,12 @@ class LevelLogic {
                 2: { path: 'java/level2/level2' }
             },
             python: {
-                1: { path: 'python/level1/level1' },
+                1: {
+                    path: 'python/level1/level1',
+                    sublevels: {
+                        integer: 'python/level1/DataType/integer'
+                    }
+                },
                 2: { path: 'python/level2/level2' }
             },
         };
