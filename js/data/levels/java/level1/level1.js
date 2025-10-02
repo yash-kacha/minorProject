@@ -86,6 +86,20 @@ const javaLevel1 = {
                 autoPlay: false,
                 doorType: 'integer',
                 spawnPosition: { x: 512, y: 284}
+            }),
+            // redirect to home page
+            new Sprite({
+                position: {
+                    x: 736,
+                    y: 450,
+                },
+                imageSrc: './img/Doors/Opening.png',
+                frameRate: 5,
+                frameBuffer: 4,
+                loop: false,
+                autoPlay: false,
+                doorType: 'index_redirect',
+                spawnPosition: { x: 403, y: 370}
             })
         ]
 

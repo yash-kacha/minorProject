@@ -90,8 +90,8 @@ const pythonLevel1 = {
             // redirect to home page
             new Sprite({
                 position: {
-                    x: 415,
-                    y: 350,
+                    x: 736,
+                    y: 450,
                 },
                 imageSrc: './img/Doors/Opening.png',
                 frameRate: 5,
