@@ -64,24 +64,13 @@ const pythonLevel1_integer = {
                 doorType: 'next',
                 spawnPosition: { x: 100, y: 100 }
             }),
+           
+            // go back to previous level
             new Sprite({
                 position: {
-                    x: 96,
-                    y: 169,
-                },
-                imageSrc: './img/Doors/Opening.png',
-                frameRate: 5,
-                frameBuffer: 4,
-                loop: false,
-                autoPlay: false,
-                doorType: 'hub',
-                spawnPosition: { x: 200, y: 100 }
-            }),
-            // redirect to home page
-            new Sprite({
-                position: {
-                    x: 832,
-                    y: 296,
+                    // x: 832,
+                    // y: 296,
+                    x: 512, y: 354
                 },
                 imageSrc: './img/Doors/Opening.png',
                 frameRate: 5,

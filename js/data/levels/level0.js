@@ -31,6 +31,9 @@ const level0 = {
             player.position.y = spawnPosition.y
         }
 
+        // Clear any existing door closing animation
+        doorClosing = null;
+
         // Set background
         background = new Sprite({
             position: {

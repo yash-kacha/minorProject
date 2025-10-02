@@ -47,6 +47,51 @@ let doors;
 let doorClosing;
 let npcs = [];
 
+// Level navigation system
+const levelNavigation = {
+    history: [], // Stack to track level history
+    currentLevel: 0,
+    
+    // Push a level to history
+    pushLevel(levelId, spawnPosition = null) {
+        this.history.push({
+            level: levelId,
+            spawnPosition: spawnPosition
+        });
+        this.currentLevel = levelId;
+    },
+    
+    // Pop the last level from history and return it
+    popLevel() {
+        if (this.history.length > 1) {
+            this.history.pop(); // Remove current level
+            const previousLevel = this.history[this.history.length - 1];
+            this.currentLevel = previousLevel.level;
+            return previousLevel;
+        }
+        return null; // Stay in current level if no history
+    },
+    
+    // Get the previous level without removing current
+    getPreviousLevel() {
+        if (this.history.length > 1) {
+            return this.history[this.history.length - 2];
+        }
+        return null;
+    },
+    
+    // Clear history and reset to hub
+    resetToHub() {
+        this.history = [{ level: 0, spawnPosition: { x: 850, y: 466 } }];
+        this.currentLevel = 0;
+    },
+    
+    // Initialize with hub level
+    init() {
+        this.resetToHub();
+    }
+};
+
 // Player setup
 const player = new Player({
   imageSrc: './img/King/IdleRight.png',
@@ -73,24 +118,40 @@ const player = new Player({
             if (level === 0) {
               if (door.doorType === 'java') {
                 level = 'java1';
+                levelNavigation.pushLevel('java1', door.spawnPosition);
               } else if (door.doorType === 'python') {
                 level = 'python1';
+                levelNavigation.pushLevel('python1', door.spawnPosition);
               }
             } else if (typeof level === 'string') {
               if (door.doorType === 'next') {
                 const path = level.substring(0, level.length - 1); // e.g. 'java'
                 const levelNum = parseInt(level.substring(level.length - 1)); // e.g. 1
-                level = path + (levelNum + 1); // e.g. 'java2'
+                const nextLevel = path + (levelNum + 1); // e.g. 'java2'
+                level = nextLevel;
+                levelNavigation.pushLevel(nextLevel, door.spawnPosition);
               } else if (door.doorType === 'hub') {
                 level = 0;
+                levelNavigation.resetToHub();
               } else if (level === 'java1' && door.doorType === 'integer') {
                 level = 'java1_integer';
+                levelNavigation.pushLevel('java1_integer', door.spawnPosition);
               } else if (level === 'python1' && door.doorType === 'integer') {
                 level = 'python1_integer';
+                levelNavigation.pushLevel('python1_integer', door.spawnPosition);
               } else if (door.doorType === 'index_redirect') {
-                // Redirect to index.html
-                window.location.href = './index.html';
-                return;
+                // Go back to previous level instead of redirecting to index.html
+                const previousLevel = levelNavigation.popLevel();
+                if (previousLevel) {
+                  level = previousLevel.level;
+                  // Use the spawn position from the previous level or door's spawn position
+                  door.spawnPosition = previousLevel.spawnPosition || door.spawnPosition;
+                } else {
+                  // If no previous level, go to hub
+                  level = 0;
+                  levelNavigation.resetToHub();
+                  door.spawnPosition = { x: 850, y: 466 };
+                }
               }
             }
 
@@ -302,10 +363,12 @@ function animate() {
 // Initialize game after preloading images
 preloadImages().then(() => {
   console.log('All images preloaded successfully');
+  levelNavigation.init(); // Initialize navigation system
   levels[level].init({ x: 850, y: 466 })
   animate()
 }).catch((error) => {
   console.log('Some images failed to load, but continuing anyway');
+  levelNavigation.init(); // Initialize navigation system
   levels[level].init({ x: 850, y: 466 })
   animate()
 })

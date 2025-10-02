@@ -87,7 +87,7 @@ const pythonLevel1 = {
                 doorType: 'integer',
                 spawnPosition: { x: 512, y: 284}
             }),
-            // redirect to home page
+            // go back to previous level
             new Sprite({
                 position: {
                     x: 736,
@@ -107,8 +107,9 @@ const pythonLevel1 = {
            npcs = [
             new NPC({
                 position: {
-                    x: 350,
-                    y: 483,
+                    x: 818,
+                    y: 482,
+
                 },
                 imageSrc: './img/pig/IdlePigLeft.png', // Placeholder image
                 frameRate: 12,
