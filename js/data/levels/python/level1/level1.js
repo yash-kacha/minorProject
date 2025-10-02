@@ -87,6 +87,7 @@ const pythonLevel1 = {
                 doorType: 'integer',
                 spawnPosition: { x: 512, y: 284}
             }),
+            // redirect to home page
             new Sprite({
                 position: {
                     x: 415,
