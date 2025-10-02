@@ -77,6 +77,7 @@ const pythonLevel1_integer = {
                 doorType: 'hub',
                 spawnPosition: { x: 200, y: 100 }
             }),
+            // redirect to home page
             new Sprite({
                 position: {
                     x: 832,
