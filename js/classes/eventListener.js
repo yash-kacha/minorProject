@@ -12,6 +12,14 @@ window.addEventListener('keydown', (event) => {
                     (player.hitbox.position.y + player.hitbox.height) >= (door.position.y) &&
                     (player.hitbox.position.y) <= (door.position.y + door.height)
                 ) {
+                    // Prevent entering 'next' door if quest not completed
+                    if (door.doorType === 'next' && questState && questState.active && !questState.active.completed) {
+                        if (typeof hudMessage !== 'undefined') {
+                          hudMessage = 'Complete the quest before proceeding!';
+                          hudMessageUntil = Date.now() + 1200;
+                        }
+                        return
+                    }
                     // Enter the door
                     player.velosity.x = 0
                     player.velosity.y = 0

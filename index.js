@@ -46,6 +46,11 @@ let background;
 let doors;
 let doorClosing;
 let npcs = [];
+let items = [];
+let inventory = [];
+let questState = { active: null };
+let hudMessage = '';
+let hudMessageUntil = 0;
 
 // Level navigation system
 const levelNavigation = {
@@ -125,6 +130,14 @@ const player = new Player({
               }
             } else if (typeof level === 'string') {
               if (door.doorType === 'next') {
+                // Prevent entering next level if an active quest isn't completed
+                if (questState.active && !questState.active.completed) {
+                  hudMessage = 'Complete the quest before proceeding!';
+                  hudMessageUntil = Date.now() + 1500;
+                  overlay.opacity = 0; // cancel fade
+                  player.preventInput = false;
+                  return;
+                }
                 const path = level.substring(0, level.length - 1); // e.g. 'java'
                 const levelNum = parseInt(level.substring(level.length - 1)); // e.g. 1
                 const nextLevel = path + (levelNum + 1); // e.g. 'java2'
@@ -278,6 +291,24 @@ function animate() {
   player.handleInput(keys)
   player.update()
 
+  // Item collection: collide hitbox with item rect
+  items.forEach((item) => {
+    if (item.collected) return;
+    const hb = player.hitbox;
+    const ib = item.getHitbox();
+    if (
+      hb.position.x < ib.x + ib.width &&
+      hb.position.x + hb.width > ib.x &&
+      hb.position.y < ib.y + ib.height &&
+      hb.position.y + hb.height > ib.y
+    ) {
+      item.collected = true;
+      inventory.push({ id: item.id, value: item.value, type: item.type });
+      hudMessage = `Collected ${item.type}: ${item.value}`;
+      hudMessageUntil = Date.now() + 1200;
+    }
+  });
+
   // Compute camera to keep player centered
   const viewportWidth = canvas.width / CAMERA_SCALE
   const viewportHeight = canvas.height / CAMERA_SCALE
@@ -301,9 +332,24 @@ function animate() {
   })
 
   doors.forEach((door) => {
-    door.update()
-    door.draw()
+    // If this is a 'next' door and quest is active, lock until completed
+    if (door.doorType === 'next' && questState.active && !questState.active.completed) {
+      // draw with tinted overlay to indicate locked
+      door.update()
+      door.draw()
+      c.fillStyle = 'rgba(255,0,0,0.3)'
+      c.fillRect(door.position.x, door.position.y, door.width || 32, door.height || 64)
+    } else {
+      door.update()
+      door.draw()
+    }
   })
+
+  // Items
+  items.forEach((item) => {
+    item.update();
+    item.draw();
+  });
 
   npcs.forEach((npc) => {
     npc.update();
@@ -354,6 +400,23 @@ function animate() {
   c.fillStyle = 'black'
   c.fillRect(0, 0, canvas.width, canvas.height)
   c.restore()
+
+  // HUD: inventory and messages
+  c.save();
+  c.fillStyle = 'white';
+  c.font = '16px Abaddon';
+  const invText = `Inventory: [${inventory.map((it) => it.value).join(', ')}]`;
+  c.fillText(invText, 20, 30);
+  if (questState.active) {
+    const req = questState.active.required;
+    const del = questState.active.delivered || [];
+    c.fillText(`Quest (${questState.active.type}): need [${req.join(', ')}], delivered [${del.join(', ')}]`, 20, 50);
+  }
+  if (Date.now() < hudMessageUntil && hudMessage) {
+    c.fillStyle = 'yellow';
+    c.fillText(hudMessage, 20, 70);
+  }
+  c.restore();
 }
 
 
@@ -381,6 +444,47 @@ window.addEventListener('keydown', (event) => {
       if (distance < 50) {
         npc.speak();
         break; // Interact with only one NPC at a time
+      }
+    }
+  }
+  if (event.key === 'f') {
+    // Attempt item handoff to nearby NPC
+    for (let i = 0; i < npcs.length; i++) {
+      const npc = npcs[i];
+      const distance = Math.hypot(player.position.x - npc.position.x, player.position.y - npc.position.y);
+      if (distance < 60) {
+        if (!questState.active) {
+          hudMessage = 'No quest active.';
+          hudMessageUntil = Date.now() + 1500;
+          break;
+        }
+        const req = questState.active.required;
+        const delivered = questState.active.delivered || [];
+        // find an inventory item that matches the next required value and type
+        const nextNeeded = req.find((v) => !delivered.includes(v));
+        if (nextNeeded === undefined) {
+          hudMessage = 'Quest already complete!';
+          hudMessageUntil = Date.now() + 1500;
+          break;
+        }
+        const idx = inventory.findIndex((it) => it.type === questState.active.type && it.value === nextNeeded);
+        if (idx !== -1) {
+          const [used] = inventory.splice(idx, 1);
+          questState.active.delivered = [...delivered, used.value];
+          hudMessage = `Delivered ${used.value}.`;
+          hudMessageUntil = Date.now() + 1500;
+          // Check completion
+          const remaining = req.filter((v) => !questState.active.delivered.includes(v));
+          if (remaining.length === 0) {
+            questState.active.completed = true;
+            hudMessage = 'Quest complete! Door unlocked.';
+            hudMessageUntil = Date.now() + 2000;
+          }
+        } else {
+          hudMessage = 'You do not have the required item.';
+          hudMessageUntil = Date.now() + 1500;
+        }
+        break;
       }
     }
   }

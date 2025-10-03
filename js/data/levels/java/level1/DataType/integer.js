@@ -78,5 +78,29 @@ const javaLevel1_integer = {
                 spawnPosition: { x: 200, y: 100 }
             })
         ]
+
+        // Items and quest setup for Integer sublevel (Java)
+        items = [
+            new Item({ id: 'i1', position: { x: 300, y: 450 }, value: 1, type: 'integer' }),
+            new Item({ id: 'i2', position: { x: 500, y: 420 }, value: 2, type: 'integer' }),
+            new Item({ id: 'i3', position: { x: 700, y: 380 }, value: 3, type: 'integer' }),
+        ]
+        inventory = []
+        questState.active = { type: 'integer', required: [1, 2], delivered: [], completed: false }
+
+        // Add a quest-giver NPC
+        npcs = [
+            new NPC({
+                position: { x: 260, y: 480 },
+                imageSrc: './img/pig/IdlePigLeft.png',
+                frameRate: 12,
+                frameBuffer: 4,
+                dialogue: [
+                    'Collect the integers I asked for.',
+                    'Bring me 1 and 2. Press F to hand over near me.',
+                    'The exit will unlock when done.'
+                ]
+            })
+        ]
     }
 }
