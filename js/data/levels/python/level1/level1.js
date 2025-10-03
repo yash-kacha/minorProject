@@ -104,23 +104,24 @@ const pythonLevel1 = {
             
         ]
 
-           npcs = [
+        npcs = [
             new NPC({
                 position: {
                     x: 818,
                     y: 482,
-
                 },
                 imageSrc: './img/pig/IdlePigLeft.png', // Placeholder image
                 frameRate: 12,
                 frameBuffer: 4,
                 dialogue: [
-                    'Its the first level of your learning',
-                    'in this level you need to explore various door and find real door that leads to the new levels',
-                    'if you find all and complete all sub-levels then you will be able to go to the next level',
+                    "Welcome, brave learner! You’ve entered the very first stage of your coding journey.",
+                    "In this level, many doors stand before you. Some are illusions, but one will guide you forward.",
+                    "Explore carefully, discover the real doors, and complete the sub-level challenges hidden within.",
+                    "Only when you’ve mastered them all will the true path to the next level reveal itself!"
                 ]
             }),
-           ]
+        ]
+        
 
     }
 }

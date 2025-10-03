@@ -86,17 +86,16 @@ const level0 = {
                 frameRate: 12,
                 frameBuffer: 4,
                 dialogue: [
-                    'Welcome, traveler!',
-                    'This is the hub world.',
-                    'The door on the left leads to the Java path.',
-                    'The door on the right leads to the Python path.',
-                    'Choose your destiny!'
+                    "Greetings, traveler!",
+                    "This is the hub of knowledge, where coding paths await you.",
+                    "The door on the left will guide you into the world of Java.",
+                    "The door on the right will open the journey of Python.",
+                    "Step forward and choose wisely, for your path will shape your learning!"
                 ]
             }),
-
+        
             new NPC({
                 position: {
-
                     x: 250,
                     y: 131,
                 },
@@ -104,15 +103,15 @@ const level0 = {
                 frameRate: 12,
                 frameBuffer: 4,
                 dialogue: [
-                    'Great Choise with Java!!!',
-                    'Wishing you a very Beautiful learning Journey',
-                    
+                    "Ah, you’ve chosen Java!",
+                    "Java is strong, structured, and powers countless real-world applications.",
+                    "With discipline and logic, you will master it.",
+                    "May your learning journey be filled with clarity and success!"
                 ]
             }),
-
-             new NPC({
+        
+            new NPC({
                 position: {
-
                     x: 720,
                     y: 258,
                 },
@@ -120,14 +119,13 @@ const level0 = {
                 frameRate: 12,
                 frameBuffer: 4,
                 dialogue: [
-                    'Great Choise with Python!!!',
-                    'Wishing you a very Beautiful learning Journey',
-                    
+                    "Ah, you’ve chosen Python!",
+                    "Python is simple, elegant, and the favorite of data wizards and AI masters.",
+                    "With curiosity and practice, it will become your greatest tool.",
+                    "May your learning journey be smooth and inspiring!"
                 ]
             })
-
-
-
         ]
+        
     }
 }

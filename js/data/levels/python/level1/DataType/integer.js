@@ -81,16 +81,31 @@ const pythonLevel1_integer = {
                 spawnPosition: { x: 799, y: 306}
             })
         ]
+        
+        //
+    
 
+
+
+
+
+        
         // Items and quest setup for Integer sublevel (Python)
         items = [
-            new Item({ id: 'pi1', position: { x: 338, y: 402 }, value: 4, type: 'integer' }),
-            new Item({ id: 'pi2', position: { x: 300, y: 402 }, value: 5, type: 'integer' }),
-            new Item({ id: 'pi3', position: { x:453 , y:195 }, value: 6, type: 'integer' }),
-            
+            new Item({ id: 'pi1', position: { x: 845, y: 323 }, value: 4, type: 'integer' }),
+            new Item({ id: 'pi2', position: { x: 835, y: 135 }, value: -5, type: 'integer' }),
+            new Item({ id: 'pi3', position: { x: 705, y: 150 }, value: 6, type: 'integer' }),
+            new Item({ id: 'pi4', position: { x: 591, y: 163 }, value: 7, type: 'integer' }),
+            new Item({ id: 'pi5', position: { x: 165, y: 160 }, value: 0, type: 'integer' }),
+            new Item({ id: 'pi6', position: { x: 338, y: 415 }, value: -2, type: 'integer' }),
+            new Item({ id: 'pi7', position: { x: 300, y: 210 }, value: -9, type: 'integer' }),
+            new Item({ id: 'pi8', position: { x:224, y:422 }, value: 5, type: 'integer' }),
+            new Item({ id: 'pi9', position: { x:136, y:326 }, value: -1, type: 'integer' }),
+            new Item({ id: 'pi10', position: { x:386, y:150}, value: 3, type: 'integer' }),
         ]
+        
         inventory = []
-        questState.active = { type: 'integer', required: [4, 6], delivered: [], completed: false }
+        questState.active = { type: 'integer', required: [4, -9,7,0,6,-2], delivered: [], completed: false }
 
         // Add a quest-giver NPC
         npcs = [
@@ -100,10 +115,16 @@ const pythonLevel1_integer = {
                 frameRate: 12,
                 frameBuffer: 4,
                 dialogue: [
-                    'Collect the integers I asked for.',
-                    'Bring me 4 and 6. Press F to hand over near me.',
-                    'The exit will unlock when done.'
+                    "Hello, young coder! Let's learn about integers today.",
+                    "Integers are whole numbers: positive, negative, or zero.",
+                    "For example: 4, 2, -3, 0, and 7 are integers.",
+                    "But numbers like 5.5, 1/3, π, or -4.4 are NOT integers.",
+                    "I need you to collect a few integers for me.",
+                    "Please bring me 4, -9, 7, 0, -2 and 6. Stand near me and press F to hand them over.",
+                    "Once you've given me the numbers, the exit will unlock."
                 ]
+                
+                
             })
         ]
     }

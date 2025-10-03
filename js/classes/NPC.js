@@ -37,7 +37,7 @@ class NPC extends Sprite {
         clearInterval(this.typingInterval);
         this.isTyping = false;
       }
-    }, 50); // Adjust typing speed here (milliseconds)
+    },30); // Adjust typing speed here (milliseconds)
   }
 
   skipTyping() {
