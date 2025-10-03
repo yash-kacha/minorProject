@@ -26,7 +26,8 @@ function preloadImages() {
     './img/King/JumpRight.png',
     './img/King/Fall.png',
     './img/King/Door_in.png',
-    './img/King/Door_Out.png'
+    './img/King/Door_Out.png',
+    './img/bgBox.png'
   ];
   
   return Promise.all(imageUrls.map(url => {
@@ -375,6 +376,7 @@ function animate() {
     doorClosing.draw()
   }
 
+  // Draw player last so it sits on top of items/doors
   player.draw()
 
   // Restore to draw screen-space overlay
@@ -403,6 +405,7 @@ function animate() {
 
   // HUD: inventory and messages
   c.save();
+  c.imageSmoothingEnabled = false;
   c.fillStyle = 'white';
   c.font = '16px Abaddon';
   const invText = `Inventory: [${inventory.map((it) => it.value).join(', ')}]`;

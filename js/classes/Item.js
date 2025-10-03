@@ -4,9 +4,16 @@ class Item {
         this.position = position;
         this.value = value;
         this.type = type; // 'integer' | 'float' | 'char' | 'boolean' | ...
-        this.width = 20;
-        this.height = 20;
+        this.width = 26;
+        this.height = 26;
         this.collected = false;
+
+        if (!Item.bgBoxImage) {
+            Item.bgBoxImage = new Image();
+            Item.bgBoxImage.src = './img/bgBox.png';
+            Item.bgBoxLoaded = false;
+            Item.bgBoxImage.onload = () => { Item.bgBoxLoaded = true; };
+        }
     }
 
     getHitbox() {
@@ -24,23 +31,28 @@ class Item {
 
     draw() {
         if (this.collected) return;
-        // Draw a simple token depending on type
-        const colorsByType = {
-            integer: '#4CAF50',
-            float: '#2196F3',
-            char: '#FFC107',
-            boolean: '#E91E63',
-        };
-        const fill = colorsByType[this.type] || '#9E9E9E';
+        // Background box
+        if (Item.bgBoxImage && Item.bgBoxImage.complete) {
+            c.drawImage(Item.bgBoxImage, this.position.x, this.position.y, this.width, this.height);
+        } else {
+            // Fallback color if image not loaded yet
+            c.fillStyle = '#2b2d42';
+            c.fillRect(this.position.x, this.position.y, this.width, this.height);
+        }
 
-        c.fillStyle = fill;
-        c.fillRect(this.position.x, this.position.y, this.width, this.height);
-
-        // Value label above the item
-        c.fillStyle = 'white';
-        c.font = '12px Abaddon';
-        const label = String(this.value);
-        c.fillText(label, this.position.x - Math.max(0, (label.length - 1) * 3), this.position.y - 4);
+        // Centered pixelated number with outline for contrast
+        c.save();
+        c.font = '16px Abaddon';
+        c.textAlign = 'center';
+        c.textBaseline = 'middle';
+        const centerX = this.position.x + this.width / 2;
+        const centerY = this.position.y + this.height / 2 + 1;
+        c.strokeStyle = 'white';
+        c.lineWidth = 2;
+        c.strokeText(String(this.value), centerX, centerY);
+        c.fillStyle = '#111';
+        c.fillText(String(this.value), centerX, centerY);
+        c.restore();
     }
 }
 
