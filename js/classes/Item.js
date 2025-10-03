@@ -4,8 +4,8 @@ class Item {
         this.position = position;
         this.value = value;
         this.type = type; // 'integer' | 'float' | 'char' | 'boolean' | ...
-        this.width = 26;
-        this.height = 26;
+        this.width = 20;
+        this.height = 20;
         this.collected = false;
 
         if (!Item.bgBoxImage) {

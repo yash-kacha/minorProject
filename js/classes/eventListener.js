@@ -31,20 +31,20 @@ window.addEventListener('keydown', (event) => {
             }
             // Jump if not near a door
             if (player.velosity.y === 0) player.velosity.y = -15
-            console.log(`Player position: x=${player.position.x}, y=${player.position.y}`);
+            console.log(`Player position: x:${player.position.x}, y:${player.position.y}`);
             break
         case 'a':
             // Move left
             keys.a.pressed = true
-            console.log(`Player position: x=${player.position.x}, y=${player.position.y}`);
+            console.log(`Player position: x:${player.position.x}, y:${player.position.y}`);
             break
         case 'd':
             // Move right
             keys.d.pressed = true
-            console.log(`Player position: x=${player.position.x}, y=${player.position.y}`);
+            console.log(`Player position: x:${player.position.x}, y:${player.position.y}`);
             break
         case 's':
-            console.log(`Player position: x=${player.position.x}, y=${player.position.y}`);
+            console.log(`Player position: x:${player.position.x}, y:${player.position.y}`);
             break
     }
 })

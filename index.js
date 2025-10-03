@@ -171,6 +171,11 @@ const player = new Player({
 
             console.log('next level:', level);
             
+            // Reset transient state so sublevel items/quests don't leak into other levels
+            items = [];
+            inventory = [];
+            questState = { active: null };
+            
             levels[level].init(door.spawnPosition);
     
             // Fade out black screen first, then start door exit animation
